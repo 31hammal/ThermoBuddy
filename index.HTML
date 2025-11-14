@@ -1,62 +1,332 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>ThermoBuddy – Color-Changing Desk Buddy</title>
+
+<style>
+  :root{
+    --accent:#7a9eff;
+    --accent-2:#557aff;
+    --bg1:#d4ecff;
+    --bg2:#ffffff;
+    --text:#222;
+    --muted:#666;
+  }
+  body{
+    margin:0;
+    font-family:Inter, system-ui, -apple-system, "Poppins", sans-serif;
+    background:linear-gradient(135deg,var(--bg1),var(--bg2));
+    color:var(--text);
+  }
+
+  header{
+    text-align:center;
+    padding:2rem 1rem;
+    background:linear-gradient(90deg,var(--accent),#a8c4ff);
+    color:#fff;
+    border-bottom-left-radius:18px;
+    border-bottom-right-radius:18px;
+    box-shadow:0 6px 18px rgba(0,0,0,0.15);
+  }
+  header h1{
+    font-size:2.5rem;
+    margin:0;
+  }
+  header p{font-size:1.1rem;margin-top:.4rem;}
+
+  .container{
+    max-width:1050px;
+    margin:1.5rem auto;
+    padding:0 1rem;
+  }
+
+  .hero{
+    display:grid;
+    grid-template-columns:1fr 350px;
+    gap:20px;
+    align-items:center;
+  }
+
+  .card{
+    background:white;
+    padding:1.5rem;
+    border-radius:16px;
+    box-shadow:0 8px 24px rgba(0,0,0,0.08);
+  }
+
+  .lead{
+    font-size:1.2rem;
+    line-height:1.6;
+    color:var(--muted);
+  }
+
+  .color-samples{
+    display:flex;
+    gap:20px;
+    margin-top:1rem;
+  }
+  .sample{
+    width:80px;
+    height:80px;
+    border-radius:12px;
+    border:2px solid #eee;
+  }
+  .cool{background:linear-gradient(135deg,#8a9cff,#c8d0ff);}
+  .warm{background:white;}
+
+  .buy-panel select, input{
+    width:100%;
+    padding:10px;
+    border-radius:10px;
+    border:1px solid #ddd;
+    font-size:1rem;
+  }
+
+  .buy-now{
+    background:var(--accent);
+    color:white;
+    border:none;
+    padding:14px;
+    width:100%;
+    border-radius:12px;
+    font-size:1.15rem;
+    cursor:pointer;
+    margin-top:10px;
+  }
+  .buy-now:hover{background:var(--accent-2);}
+
+  /* Checkout backdrop */
+  .modal-backdrop{
+    position:fixed;
+    inset:0;
+    display:none;
+    background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(4px);
+    align-items:center;
+    justify-content:center;
+    z-index:999;
+  }
+  .modal{
+    background:white;
+    padding:1.5rem;
+    width:min(720px,95%);
+    border-radius:16px;
+    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+  }
+
+  footer{
+    text-align:center;
+    background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;
+    padding:1.5rem;
+    margin-top:2rem;
+    border-radius:12px;
+  }
+
+  /* THANK YOU MODAL */
+  #thankYouModal{
+    display:none;
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(4px);
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+  }
+  #thankYouBox{
+    background:white;
+    padding:22px;
+    width:min(420px,90%);
+    border-radius:18px;
+    box-shadow:0 8px 30px rgba(0,0,0,0.25);
+    text-align:center;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" 
+       alt="ThermoBuddy Logo"
+       style="width:120px;height:auto;margin-bottom:10px;">
+  <h1>ThermoBuddy – Color-Changing Desk Buddy</h1>
+  <p>Created by Allison, Emily, and Ella</p>
+</header>
+
+<main class="container">
+
+  <!-- HERO -->
+  <div class="hero">
+    <div class="card">
+      <h2>What is ThermoBuddy?</h2>
+      <p class="lead">
+        ThermoBuddy is a joyful desk friend that changes color with temperature —
+        <strong>violet-blue</strong> under <strong>25°C (77°F)</strong>  
+        and <strong>white</strong> above it!
+      </p>
+
+      <!-- Images -->
+      <img src="ThermoBuddy Elephant Logo Design.png"
+           alt="ThermoBuddy Elephant"
+           style="width:100%;border-radius:16px;margin-top:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+
+      <div class="color-samples">
+        <div>
+          <div class="sample cool"></div>
+          <div class="small">Cold (Violet-Blue)</div>
+        </div>
+        <div>
+          <div class="sample warm"></div>
+          <div class="small">Warm (White)</div>
+        </div>
+      </div>
+
+      <p style="margin-top:1rem;color:var(--muted);font-size:1rem;">
+        Fun Fact: Thermochromic pigments physically shift their structure when heated —  
+        that’s why they change color!
+      </p>
+    </div>
+
+    <!-- BUY PANEL -->
+    <aside class="card buy-panel">
+      <h2 style="margin-top:0">Buy ThermoBuddy</h2>
+      <label>Choose Style</label>
+      <select id="styleSelect">
+        <option>Classic Violet-Blue</option>
+        <option>Snow-White Edition</option>
+        <option>Galaxy Glow Mix</option>
+      </select>
+
+      <label style="margin-top:12px;">Quantity</label>
+      <input id="qty" type="number" min="1" value="1">
+
+      <button id="buyNow" class="buy-now">Buy Now → Checkout</button>
+    </aside>
+  </div>
+
+  <!-- STEAM SECTION -->
+  <div class="card" style="margin-top:1.5rem;">
+    <h2>STEAM Learning</h2>
+    <p class="lead">Explore science, engineering, art, and heat-activated pigments!</p>
+    <ul style="font-size:1.1rem;line-height:1.6;">
+      <li>Graph the temperature where the color flips</li>
+      <li>Test different 3D-printed thicknesses</li>
+      <li>Experiment with pigment mixtures</li>
+    </ul>
+  </div>
+
+  <div class="card" style="margin-top:1.5rem;">
+    <h2>Fun Facts</h2>
+    <ul style="font-size:1.1rem;line-height:1.6;">
+      <li>Used in mood rings, baby spoons, and mugs</li>
+      <li>Thermochromism = temperature-driven color change</li>
+    </ul>
+  </div>
+
+</main>
+
+<!-- CHECKOUT MODAL -->
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <h2>Checkout</h2>
+
+    <div style="display:flex;gap:10px;">
+      <div style="flex:1;">
+        <label>First Name</label>
+        <input id="firstName" type="text" placeholder="Allison">
+      </div>
+      <div style="flex:1;">
+        <label>Last Name</label>
+        <input id="lastName" type="text" placeholder="Smith">
+      </div>
+    </div>
+
+    <label style="margin-top:10px;">Email</label>
+    <input id="email" type="email" placeholder="you@example.com">
+
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <div style="flex:1;">
+        <label>Address</label>
+        <input id="addr" type="text" placeholder="123 Maker Lane">
+      </div>
+      <div style="flex:1;">
+        <label>Country</label>
+        <select id="country">
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="confirmBtn" class="buy-now" style="margin-top:16px;">Submit Order</button>
+  </div>
+</div>
+
+<!-- THANK YOU MODAL -->
+<div id="thankYouModal">
+  <div id="thankYouBox">
+    <h2 style="color:#4a5cff;font-size:2rem;">Thank You! 💜</h2>
+
+    <p id="tyMessage" style="font-size:1.1rem;line-height:1.5;margin-top:10px;">
+      Your order has been received!
+    </p>
+
+    <div style="margin-top:18px;padding:12px;background:#f4f6ff;border-radius:12px;text-align:left;">
+      <strong>Fun Fact:</strong> ThermoBuddy uses thermochromic pigments that
+      change structure above 25°C!
+    </div>
+
+    <button id="closeTY" class="buy-now" style="margin-top:20px;width:auto;padding:10px 20px;">Close</button>
+  </div>
+</div>
+
+<footer>
+  <small>© 2025 ThermoBuddy – Created by Students 💖</small>
+</footer>
+
+<!-- SCRIPT -->
 <script>
   const buyBtn = document.getElementById('buyNow');
   const backdrop = document.getElementById('modalBackdrop');
   const confirmBtn = document.getElementById('confirmBtn');
 
-  // Open checkout modal
   function openModal(){
-    backdrop.style.display = 'flex';
-    backdrop.setAttribute('aria-hidden','false');
-    document.body.style.overflow = 'hidden';
+    backdrop.style.display="flex";
+    document.body.style.overflow="hidden";
   }
-
   function closeModal(){
-    backdrop.style.display = 'none';
-    backdrop.setAttribute('aria-hidden','true');
-    document.body.style.overflow = '';
+    backdrop.style.display="none";
+    document.body.style.overflow="";
   }
 
-  buyBtn.addEventListener('click', openModal);
-  backdrop.addEventListener('click', (e)=>{
-    if(e.target === backdrop) closeModal();
-  });
+  buyBtn.addEventListener("click", openModal);
 
-  // ------------------------------------
-  // THANK YOU SCREEN SETUP
-  // ------------------------------------
   const thankYouModal = document.getElementById("thankYouModal");
   const closeTY = document.getElementById("closeTY");
 
   closeTY.onclick = function(){
-    thankYouModal.style.display = "none";
-  }
+    thankYouModal.style.display="none";
+  };
 
-  // When user clicks Confirm Purchase
-  confirmBtn.addEventListener('click', ()=>{
-    const qty = document.getElementById('qty').value || 1;
-    const style = document.getElementById('styleSelect').value || 'Classic Violet-Blue';
-    const first = document.getElementById('firstName').value || 'Friend';
+  confirmBtn.addEventListener("click", ()=>{
+    const qty = document.getElementById("qty").value;
+    const style = document.getElementById("styleSelect").value;
+    const first = document.getElementById("firstName").value || "Friend";
 
-    // Close checkout first
     closeModal();
 
-    // Slight delay for smoother transition
     setTimeout(()=>{
-      // Open final thank you modal
-      thankYouModal.style.display = "flex";
-
-      // (Optional) personalize message
+      thankYouModal.style.display="flex";
       document.getElementById("tyMessage").innerText =
-        `${first}, your order of ${qty}× ThermoBuddy (${style}) has been received!`;
-
-    }, 150);
-  });
-
-  // Escape key closes modals
-  document.addEventListener('keydown', (e)=>{
-    if(e.key === 'Escape'){
-      closeModal();
-      thankYouModal.style.display = "none";
-    }
+        `${first}, your order of ${qty} × ThermoBuddy (${style}) has been received!`;
+    },150);
   });
 </script>
+
+</body>
+</html>
