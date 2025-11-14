@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>ThermoBuddy</title>
+
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -13,50 +14,76 @@
             padding: 40px;
         }
 
-        .logo {
-            width: 400px;
-            margin-bottom: 30px;
-        }
+        .logo { width: 400px; margin-bottom: 30px; }
+        .elephant { width: 350px; margin-top: 20px; }
 
-        .elephant {
-            width: 350px;
-            margin-top: 20px;
-        }
-
-        h1 {
-            font-size: 42px;
-            font-weight: bold;
-            margin-bottom: 10px;
-        }
-
-        p {
-            font-size: 22px;
-            max-width: 700px;
-            margin: auto;
-            line-height: 1.5;
-        }
+        h1 { font-size: 42px; font-weight: bold; margin-bottom: 10px; }
+        p { font-size: 22px; max-width: 700px; margin: auto; line-height: 1.5; }
 
         .btn {
             background: #4a74ff;
             color: white;
             padding: 16px 32px;
-            border-radius: 10px;
+            border-radius: 12px;
             border: none;
             font-size: 22px;
             cursor: pointer;
             margin: 15px;
+            transition: 0.2s;
+        }
+        .btn:hover { opacity: 0.85; }
+
+        /* Full-screen overlay modal */
+        .overlay {
+            display: none;
+            position: fixed;
+            top: 0; left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.55);
+            backdrop-filter: blur(6px);
+            justify-content: center;
+            align-items: center;
+            z-index: 999;
         }
 
-        .btn:hover {
-            opacity: 0.85;
+        .modal-box {
+            background: white;
+            width: 90%;
+            max-width: 450px;
+            padding: 30px;
+            border-radius: 18px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.2);
+            text-align: left;
+            font-size: 20px;
+        }
+
+        .modal-box h2 {
+            text-align: center;
+            margin-top: 0;
+            font-size: 30px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 12px;
+            margin-top: 10px;
+            margin-bottom: 18px;
+            border-radius: 10px;
+            border: 1px solid #ccc;
+            font-size: 18px;
+        }
+
+        #closeOrder, #closeStyle {
+            background: #ff5c5c;
+            width: 100%;
         }
 
         /* Speech bubble modal */
         #speechModal {
             display: none;
             position: fixed;
-            top: 50%;
-            left: 50%;
+            top: 50%; left: 50%;
             transform: translate(-50%, -50%);
             background: white;
             padding: 25px;
@@ -64,8 +91,8 @@
             box-shadow: 0 0 25px rgba(0,0,0,0.2);
             width: 320px;
             font-size: 20px;
+            z-index: 1000;
         }
-
         #speechModal::after {
             content: "";
             position: absolute;
@@ -74,11 +101,6 @@
             border-width: 20px;
             border-style: solid;
             border-color: white transparent transparent transparent;
-        }
-
-        #closeBtn {
-            margin-top: 20px;
-            background: #ff5c5c;
         }
     </style>
 </head>
@@ -89,17 +111,17 @@
     <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" class="logo" alt="ThermoBuddy Logo">
 
     <h1>Meet ThermoBuddy!</h1>
+
     <p>
         ThermoBuddy is a smart color-changing desk companion  
-        that shows temperature in **Celsius and Fahrenheit**  
-        and reacts with adorable animations.
+        that displays **Celsius and Fahrenheit** and reacts with adorable animations.
     </p>
 
     <button class="btn" onclick="openSpeech()">Say hi to ThermoBuddy</button>
-    <button class="btn">Choose Your Style</button>
-    <button class="btn">Buy Now</button>
+    <button class="btn" onclick="openStyle()">Choose Your Style</button>
+    <button class="btn" onclick="openOrder()">Buy Now</button>
 
-    <!-- Elephant image -->
+    <!-- Elephant -->
     <img src="ThermoBuddy Elephant Logo Design.png" class="elephant" alt="ThermoBuddy Elephant">
 
     <!-- Speech bubble modal -->
@@ -107,17 +129,69 @@
         Hi!! I'm ThermoBuddy!  
         I change colors based on room temperature!
         <br><br>
-        <button id="closeBtn" class="btn" onclick="closeSpeech()">Close</button>
+        <button class="btn" style="background:#ff5c5c;" onclick="closeSpeech()">Close</button>
+    </div>
+
+    <!-- BUY NOW OVERLAY -->
+    <div id="orderOverlay" class="overlay">
+        <div class="modal-box">
+            <h2>Order ThermoBuddy</h2>
+
+            <label>Your Name</label>
+            <input type="text" placeholder="John Doe">
+
+            <label>Email</label>
+            <input type="email" placeholder="email@example.com">
+
+            <label>Shipping Address</label>
+            <input type="text" placeholder="123 Example Street">
+
+            <label>Quantity</label>
+            <input type="number" min="1" value="1">
+
+            <label>Choose Style</label>
+            <select>
+                <option>Classic Blue</option>
+                <option>Purple Fade</option>
+                <option>Snow White</option>
+                <option>Galaxy Gradient</option>
+            </select>
+
+            <button class="btn">Submit Order</button>
+            <button id="closeOrder" class="btn" onclick="closeOrder()">Close</button>
+        </div>
+    </div>
+
+    <!-- STYLE OPTIONS OVERLAY -->
+    <div id="styleOverlay" class="overlay">
+        <div class="modal-box">
+            <h2>Choose Your Style</h2>
+
+            <select id="styleSelect">
+                <option>Classic Blue</option>
+                <option>Purple Fade</option>
+                <option>Snow White</option>
+                <option>Galaxy Gradient</option>
+            </select>
+
+            <p style="font-size:18px; text-align:center;">
+                This will be your ThermoBuddy's theme color!
+            </p>
+
+            <button id="closeStyle" class="btn" onclick="closeStyle()">Close</button>
+        </div>
     </div>
 
     <script>
-        function openSpeech() {
-            document.getElementById("speechModal").style.display = "block";
-        }
+        function openSpeech() { document.getElementById("speechModal").style.display = "block"; }
+        function closeSpeech() { document.getElementById("speechModal").style.display = "none"; }
 
-        function closeSpeech() {
-            document.getElementById("speechModal").style.display = "none";
-        }
+        function openOrder() { document.getElementById("orderOverlay").style.display = "flex"; }
+        function closeOrder() { document.getElementById("orderOverlay").style.display = "none"; }
+
+        function openStyle() { document.getElementById("styleOverlay").style.display = "flex"; }
+        function closeStyle() { document.getElementById("styleOverlay").style.display = "none"; }
     </script>
+
 </body>
 </html>
