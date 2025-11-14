@@ -1,20 +1,123 @@
-/* ✨ Sparkle shimmer effect with clear color changes */
-.sparkle {
-  font-weight: bold;
-  background: linear-gradient(
-    270deg,
-    #ffd700,  /* gold */
-    #ff80ab,  /* pink */
-    #ffd700   /* gold */
-  );
-  background-size: 400% 400%;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: shimmer 6s ease infinite;
-}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ThermoBuddy</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: #f7f9fc;
+            margin: 0;
+            padding: 40px;
+        }
 
-@keyframes shimmer {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
+        .logo {
+            width: 400px;
+            margin-bottom: 30px;
+        }
+
+        .elephant {
+            width: 350px;
+            margin-top: 20px;
+        }
+
+        h1 {
+            font-size: 42px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
+
+        p {
+            font-size: 22px;
+            max-width: 700px;
+            margin: auto;
+            line-height: 1.5;
+        }
+
+        .btn {
+            background: #4a74ff;
+            color: white;
+            padding: 16px 32px;
+            border-radius: 10px;
+            border: none;
+            font-size: 22px;
+            cursor: pointer;
+            margin: 15px;
+        }
+
+        .btn:hover {
+            opacity: 0.85;
+        }
+
+        /* Speech bubble modal */
+        #speechModal {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: white;
+            padding: 25px;
+            border-radius: 20px;
+            box-shadow: 0 0 25px rgba(0,0,0,0.2);
+            width: 320px;
+            font-size: 20px;
+        }
+
+        #speechModal::after {
+            content: "";
+            position: absolute;
+            bottom: -20px;
+            left: 150px;
+            border-width: 20px;
+            border-style: solid;
+            border-color: white transparent transparent transparent;
+        }
+
+        #closeBtn {
+            margin-top: 20px;
+            background: #ff5c5c;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- Logo -->
+    <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" class="logo" alt="ThermoBuddy Logo">
+
+    <h1>Meet ThermoBuddy!</h1>
+    <p>
+        ThermoBuddy is a smart color-changing desk companion  
+        that shows temperature in **Celsius and Fahrenheit**  
+        and reacts with adorable animations.
+    </p>
+
+    <button class="btn" onclick="openSpeech()">Say hi to ThermoBuddy</button>
+    <button class="btn">Choose Your Style</button>
+    <button class="btn">Buy Now</button>
+
+    <!-- Elephant image -->
+    <img src="ThermoBuddy Elephant Logo Design.png" class="elephant" alt="ThermoBuddy Elephant">
+
+    <!-- Speech bubble modal -->
+    <div id="speechModal">
+        Hi!! I'm ThermoBuddy!  
+        I change colors based on room temperature!
+        <br><br>
+        <button id="closeBtn" class="btn" onclick="closeSpeech()">Close</button>
+    </div>
+
+    <script>
+        function openSpeech() {
+            document.getElementById("speechModal").style.display = "block";
+        }
+
+        function closeSpeech() {
+            document.getElementById("speechModal").style.display = "none";
+        }
+    </script>
+</body>
+</html>
