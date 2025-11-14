@@ -1,197 +1,261 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ThermoBuddy</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>ThermoBuddy</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Helvetica Neue', Arial, sans-serif;
+      background: linear-gradient(#e9f0ff, #ffffff);
+      text-align: center;
+      color: #2a2a2a;
+    }
 
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            text-align: center;
-            background: #f7f9fc;
-            margin: 0;
-            padding: 40px;
-        }
+    header {
+      padding: 40px 20px;
+    }
 
-        .logo { width: 400px; margin-bottom: 30px; }
-        .elephant { width: 350px; margin-top: 20px; }
+    .logo {
+      width: 420px;
+      max-width: 90%;
+    }
 
-        h1 { font-size: 42px; font-weight: bold; margin-bottom: 10px; }
-        p { font-size: 22px; max-width: 700px; margin: auto; line-height: 1.5; }
+    h1 {
+      font-size: 48px;
+      font-weight: 800;
+      margin-top: 20px;
+    }
 
-        .btn {
-            background: #4a74ff;
-            color: white;
-            padding: 16px 32px;
-            border-radius: 12px;
-            border: none;
-            font-size: 22px;
-            cursor: pointer;
-            margin: 15px;
-            transition: 0.2s;
-        }
-        .btn:hover { opacity: 0.85; }
+    p.subtitle {
+      font-size: 22px;
+      max-width: 700px;
+      margin: 10px auto 40px;
+      line-height: 1.5;
+    }
 
-        /* Full-screen overlay modal */
-        .overlay {
-            display: none;
-            position: fixed;
-            top: 0; left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.55);
-            backdrop-filter: blur(6px);
-            justify-content: center;
-            align-items: center;
-            z-index: 999;
-        }
+    .elephant {
+      width: 360px;
+      margin-top: 40px;
+    }
 
-        .modal-box {
-            background: white;
-            width: 90%;
-            max-width: 450px;
-            padding: 30px;
-            border-radius: 18px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.2);
-            text-align: left;
-            font-size: 20px;
-        }
+    .btn {
+      background: #4a74ff;
+      color: white;
+      padding: 18px 34px;
+      border-radius: 16px;
+      border: none;
+      font-size: 22px;
+      cursor: pointer;
+      margin: 12px;
+      transition: 0.2s;
+    }
 
-        .modal-box h2 {
-            text-align: center;
-            margin-top: 0;
-            font-size: 30px;
-        }
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 18px rgba(0, 0, 0, 0.15);
+    }
 
-        input, select {
-            width: 100%;
-            padding: 12px;
-            margin-top: 10px;
-            margin-bottom: 18px;
-            border-radius: 10px;
-            border: 1px solid #ccc;
-            font-size: 18px;
-        }
+    /* Overlay */
+    .overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.45);
+      backdrop-filter: blur(6px);
+      justify-content: center;
+      align-items: center;
+      z-index: 999;
+    }
 
-        #closeOrder, #closeStyle {
-            background: #ff5c5c;
-            width: 100%;
-        }
+    .modal-box {
+      background: white;
+      width: 92%;
+      max-width: 480px;
+      padding: 35px;
+      border-radius: 22px;
+      box-shadow: 0 0 35px rgba(0, 0, 0, 0.25);
+      text-align: left;
+      animation: pop 0.25s ease;
+    }
 
-        /* Speech bubble modal */
-        #speechModal {
-            display: none;
-            position: fixed;
-            top: 50%; left: 50%;
-            transform: translate(-50%, -50%);
-            background: white;
-            padding: 25px;
-            border-radius: 20px;
-            box-shadow: 0 0 25px rgba(0,0,0,0.2);
-            width: 320px;
-            font-size: 20px;
-            z-index: 1000;
-        }
-        #speechModal::after {
-            content: "";
-            position: absolute;
-            bottom: -20px;
-            left: 150px;
-            border-width: 20px;
-            border-style: solid;
-            border-color: white transparent transparent transparent;
-        }
-    </style>
+    @keyframes pop {
+      from { transform: scale(0.85); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+
+    input, select {
+      width: 100%;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 12px;
+      margin-top: 8px;
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+
+    .close-btn {
+      background: #ff5c5c;
+      margin-top: 10px;
+    }
+
+    /* Speech bubble */
+    #speechModal {
+      display: none;
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: white;
+      padding: 25px;
+      border-radius: 20px;
+      box-shadow: 0 0 25px rgba(0,0,0,0.2);
+      width: 340px;
+      font-size: 20px;
+      z-index: 1000;
+      animation: pop 0.25s ease;
+    }
+
+    #speechModal::after {
+      content: '';
+      position: absolute;
+      bottom: -22px;
+      left: 150px;
+      border-width: 22px;
+      border-style: solid;
+      border-color: white transparent transparent transparent;
+    }
+
+    /* Temperature slider */
+    #tempContainer {
+      margin-top: 40px;
+    }
+
+    #tempValue {
+      font-size: 24px;
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    input[type=range] {
+      width: 60%;
+      margin-top: 15px;
+    }
+  </style>
 </head>
 
 <body>
-
-    <!-- Logo -->
+  <header>
     <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" class="logo" alt="ThermoBuddy Logo">
-
     <h1>Meet ThermoBuddy!</h1>
+    <p class="subtitle">Your smart, color-changing temperature buddy. He reacts to heat and cold, glows in different moods, and brings your desk to life.</p>
 
-    <p>
-        ThermoBuddy is a smart color-changing desk companion  
-        that displays **Celsius and Fahrenheit** and reacts with adorable animations.
-    </p>
-
-    <button class="btn" onclick="openSpeech()">Say hi to ThermoBuddy</button>
-    <button class="btn" onclick="openStyle()">Choose Your Style</button>
+    <button class="btn" onclick="openSpeech()">Say Hi</button>
+    <button class="btn" onclick="openStyle()">Choose Style</button>
     <button class="btn" onclick="openOrder()">Buy Now</button>
+  </header>
 
-    <!-- Elephant -->
-    <img src="ThermoBuddy Elephant Logo Design.png" class="elephant" alt="ThermoBuddy Elephant">
+  <img src="ThermoBuddy Elephant Logo Design.png" class="elephant" id="elephantImg" alt="Elephant Character">
 
-    <!-- Speech bubble modal -->
-    <div id="speechModal">
-        Hi!! I'm ThermoBuddy!  
-        I change colors based on room temperature!
-        <br><br>
-        <button class="btn" style="background:#ff5c5c;" onclick="closeSpeech()">Close</button>
+  <!-- Temperature Color Simulator -->
+  <div id="tempContainer">
+    <h2>Temperature Simulator</h2>
+    <input type="range" id="tempSlider" min="0" max="40" value="20" oninput="updateTemp()">
+    <div id="tempValue">20°C / 68°F</div>
+  </div>
+
+  <!-- Speech bubble -->
+  <div id="speechModal">
+    Hi!! I'm ThermoBuddy! I change colors based on temperature! 🌡️
+    <br><br>
+    <button class="btn close-btn" onclick="closeSpeech()">Close</button>
+  </div>
+
+  <!-- Order Modal -->
+  <div id="orderOverlay" class="overlay">
+    <div class="modal-box">
+      <h2 style="text-align:center;">Order ThermoBuddy</h2>
+
+      <label>Name</label>
+      <input type="text" placeholder="Your Name">
+
+      <label>Email</label>
+      <input type="email" placeholder="email@example.com">
+
+      <label>Address</label>
+      <input type="text" placeholder="123 Street, City, Country">
+
+      <label>Quantity</label>
+      <input type="number" min="1" value="1">
+
+      <label>Choose Style</label>
+      <select>
+        <option>Classic Blue</option>
+        <option>Purple Fade</option>
+        <option>Snow White</option>
+        <option>Galaxy Gradient</option>
+      </select>
+
+      <button class="btn">Submit Order</button>
+      <button class="btn close-btn" onclick="closeOrder()">Close</button>
     </div>
+  </div>
 
-    <!-- BUY NOW OVERLAY -->
-    <div id="orderOverlay" class="overlay">
-        <div class="modal-box">
-            <h2>Order ThermoBuddy</h2>
+  <!-- Style Modal -->
+  <div id="styleOverlay" class="overlay">
+    <div class="modal-box">
+      <h2 style="text-align:center;">Choose Your Style</h2>
 
-            <label>Your Name</label>
-            <input type="text" placeholder="John Doe">
+      <select id="styleSelect" onchange="previewStyle()">
+        <option value="blue">Classic Blue</option>
+        <option value="purple">Purple Fade</option>
+        <option value="white">Snow White</option>
+        <option value="galaxy">Galaxy Gradient</option>
+      </select>
 
-            <label>Email</label>
-            <input type="email" placeholder="email@example.com">
+      <p style="font-size:18px; text-align:center;">Your ThermoBuddy will match this theme!</p>
 
-            <label>Shipping Address</label>
-            <input type="text" placeholder="123 Example Street">
-
-            <label>Quantity</label>
-            <input type="number" min="1" value="1">
-
-            <label>Choose Style</label>
-            <select>
-                <option>Classic Blue</option>
-                <option>Purple Fade</option>
-                <option>Snow White</option>
-                <option>Galaxy Gradient</option>
-            </select>
-
-            <button class="btn">Submit Order</button>
-            <button id="closeOrder" class="btn" onclick="closeOrder()">Close</button>
-        </div>
+      <button class="btn close-btn" onclick="closeStyle()">Close</button>
     </div>
+  </div>
 
-    <!-- STYLE OPTIONS OVERLAY -->
-    <div id="styleOverlay" class="overlay">
-        <div class="modal-box">
-            <h2>Choose Your Style</h2>
+  <script>
+    function openSpeech() { document.getElementById('speechModal').style.display = 'block'; }
+    function closeSpeech() { document.getElementById('speechModal').style.display = 'none'; }
 
-            <select id="styleSelect">
-                <option>Classic Blue</option>
-                <option>Purple Fade</option>
-                <option>Snow White</option>
-                <option>Galaxy Gradient</option>
-            </select>
+    function openOrder() { document.getElementById('orderOverlay').style.display = 'flex'; }
+    function closeOrder() { document.getElementById('orderOverlay').style.display = 'none'; }
 
-            <p style="font-size:18px; text-align:center;">
-                This will be your ThermoBuddy's theme color!
-            </p>
+    function openStyle() { document.getElementById('styleOverlay').style.display = 'flex'; }
+    function closeStyle() { document.getElementById('styleOverlay').style.display = 'none'; }
 
-            <button id="closeStyle" class="btn" onclick="closeStyle()">Close</button>
-        </div>
-    </div>
+    // Temperature slider color change
+    function updateTemp() {
+      let c = document.getElementById('tempSlider').value;
+      let f = Math.round(c * 9/5 + 32);
+      document.getElementById('tempValue').textContent = `${c}°C / ${f}°F`;
 
-    <script>
-        function openSpeech() { document.getElementById("speechModal").style.display = "block"; }
-        function closeSpeech() { document.getElementById("speechModal").style.display = "none"; }
+      let img = document.getElementById('elephantImg');
 
-        function openOrder() { document.getElementById("orderOverlay").style.display = "flex"; }
-        function closeOrder() { document.getElementById("orderOverlay").style.display = "none"; }
+      if (c < 10) img.style.filter = 'hue-rotate(200deg) brightness(1.2)';
+      else if (c < 20) img.style.filter = 'hue-rotate(100deg)';
+      else if (c < 30) img.style.filter = 'hue-rotate(0deg)';
+      else img.style.filter = 'hue-rotate(-60deg) brightness(1.1)';
+    }
 
-        function openStyle() { document.getElementById("styleOverlay").style.display = "flex"; }
-        function closeStyle() { document.getElementById("styleOverlay").style.display = "none"; }
-    </script>
+    function previewStyle() {
+      const style = document.getElementById('styleSelect').value;
+      const img = document.getElementById('elephantImg');
 
+      if (style === 'blue') img.style.filter = 'hue-rotate(180deg)';
+      if (style === 'purple') img.style.filter = 'hue-rotate(260deg)';
+      if (style === 'white') img.style.filter = 'brightness(1.8) saturate(0.2)';
+      if (style === 'galaxy') img.style.filter = 'hue-rotate(300deg) saturate(2)';
+    }
+  </script>
 </body>
 </html>
