@@ -30,24 +30,11 @@
     border-bottom-right-radius:18px;
     box-shadow:0 6px 18px rgba(0,0,0,0.15);
   }
-  header h1{
-    font-size:2.5rem;
-    margin:0;
-  }
+  header h1{font-size:2.5rem;margin:0;}
   header p{font-size:1.1rem;margin-top:.4rem;}
 
-  .container{
-    max-width:1050px;
-    margin:1.5rem auto;
-    padding:0 1rem;
-  }
-
-  .hero{
-    display:grid;
-    grid-template-columns:1fr 350px;
-    gap:20px;
-    align-items:center;
-  }
+  .container{max-width:1050px;margin:1.5rem auto;padding:0 1rem;}
+  .hero{display:grid;grid-template-columns:1fr 350px;gap:20px;align-items:center;}
 
   .card{
     background:white;
@@ -55,113 +42,43 @@
     border-radius:16px;
     box-shadow:0 8px 24px rgba(0,0,0,0.08);
   }
+  .lead{font-size:1.2rem;line-height:1.6;color:var(--muted);}
 
-  .lead{
-    font-size:1.2rem;
-    line-height:1.6;
-    color:var(--muted);
-  }
-
-  .color-samples{
-    display:flex;
-    gap:20px;
-    margin-top:1rem;
-  }
-  .sample{
-    width:80px;
-    height:80px;
-    border-radius:12px;
-    border:2px solid #eee;
-  }
-  .cool{background:linear-gradient(135deg,#8a9cff,#c8d0ff);} 
+  .color-samples{display:flex;gap:20px;margin-top:1rem;}
+  .sample{width:80px;height:80px;border-radius:12px;border:2px solid #eee;}
+  .cool{background:linear-gradient(135deg,#8a9cff,#c8d0ff);}
   .warm{background:white;}
 
   .buy-panel select, input{
-    width:100%;
-    padding:10px;
-    border-radius:10px;
-    border:1px solid #ddd;
-    font-size:1rem;
+    width:100%;padding:10px;border-radius:10px;border:1px solid #ddd;font-size:1rem;
   }
-
   .buy-now{
-    background:var(--accent);
-    color:white;
-    border:none;
-    padding:14px;
-    width:100%;
-    border-radius:12px;
-    font-size:1.15rem;
-    cursor:pointer;
-    margin-top:10px;
+    background:var(--accent);color:white;border:none;padding:14px;width:100%;
+    border-radius:12px;font-size:1.15rem;cursor:pointer;margin-top:10px;
   }
-  .buy-now:hover{background:var(--accent-2);} 
+  .buy-now:hover{background:var(--accent-2);}
 
   .modal-backdrop{
-    position:fixed;
-    inset:0;
-    display:none;
-    background:rgba(0,0,0,0.45);
-    backdrop-filter:blur(4px);
-    align-items:center;
-    justify-content:center;
-    z-index:999;
+    position:fixed;inset:0;display:none;background:rgba(0,0,0,0.45);
+    backdrop-filter:blur(4px);align-items:center;justify-content:center;z-index:999;
   }
   .modal{
-    background:white;
-    padding:1.5rem;
-    width:min(720px,95%);
-    border-radius:16px;
-    box-shadow:0 20px 60px rgba(0,0,0,0.3);
+    background:white;padding:1.5rem;width:min(720px,95%);
+    border-radius:16px;box-shadow:0 20px 60px rgba(0,0,0,0.3);
   }
 
   footer{
-    text-align:center;
-    background:linear-gradient(90deg,var(--accent),var(--accent-2));
-    color:white;
-    padding:1.5rem;
-    margin-top:2rem;
-    border-radius:12px;
+    text-align:center;background:linear-gradient(90deg,var(--accent),var(--accent-2));
+    color:white;padding:1.5rem;margin-top:2rem;border-radius:12px;
   }
 
   #thankYouModal{
-    display:none;
-    position:fixed;
-    inset:0;
-    background:rgba(0,0,0,0.55);
-    backdrop-filter:blur(4px);
-    align-items:center;
-    justify-content:center;
-    z-index:9999;
+    display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);
+    backdrop-filter:blur(4px);align-items:center;justify-content:center;z-index:9999;
   }
   #thankYouBox{
-    background:white;
-    padding:22px;
-    width:min(420px,90%);
-    border-radius:18px;
-    box-shadow:0 8px 30px rgba(0,0,0,0.25);
-    text-align:center;
-  }
-
-  .slider-panel{
-    margin-top:1.5rem;
-    padding:1.5rem;
-    background:white;
-    border-radius:16px;
-    box-shadow:0 8px 24px rgba(0,0,0,0.08);
-    text-align:center;
-  }
-  .slider-panel input[type="range"]{
-    width:100%;
-    margin-top:10px;
-  }
-  .temp-sample{
-    margin:1rem auto;
-    width:80px;
-    height:80px;
-    border-radius:12px;
-    border:2px solid #eee;
-    transition:background 0.3s ease;
+    background:white;padding:22px;width:min(420px,90%);
+    border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,0.25);text-align:center;
   }
 </style>
 </head>
@@ -169,8 +86,7 @@
 <body>
 
 <header>
-  <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" 
-       alt="ThermoBuddy Logo"
+  <img src="ChatGPT Image Nov 13, 2025, 03_08_05 PM.png" alt="ThermoBuddy Logo"
        style="width:120px;height:auto;margin-bottom:10px;">
   <h1>ThermoBuddy – Color-Changing Desk Buddy</h1>
   <p>Created by Allison, Emily, and Ella</p>
@@ -183,13 +99,13 @@
       <h2>What is ThermoBuddy?</h2>
       <p class="lead">
         ThermoBuddy is a joyful desk friend that changes color with temperature —
-        <strong>violet-blue</strong> under <strong>25°C (77°F)</strong>  
+        <strong>violet-blue</strong> under <strong>25°C (77°F)</strong>
         and <strong>white</strong> above it!
       </p>
 
-      <img src="ThermoBuddy Elephant Logo Design.png"
-           alt="ThermoBuddy Elephant"
-           style="width:100%;border-radius:16px;margin-top:10px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
+      <img src="ThermoBuddy Elephant Logo Design.png" alt="ThermoBuddy Elephant"
+           style="width:100%;border-radius:16px;margin-top:10px;
+                  box-shadow:0 4px 16px rgba(0,0,0,0.15);">
 
       <div class="color-samples">
         <div>
@@ -203,7 +119,7 @@
       </div>
 
       <p style="margin-top:1rem;color:var(--muted);font-size:1rem;">
-        Fun Fact: Thermochromic pigments physically shift their structure when heated —  
+        Fun Fact: Thermochromic pigments physically shift their structure when heated —
         that’s why they change color!
       </p>
     </div>
@@ -224,17 +140,6 @@
     </aside>
   </div>
 
-  <div class="slider-panel">
-    <h2>Simulate Temperature</h2>
-    <p>Slide to see how ThermoBuddy reacts to heat!</p>
-    <input type="range" id="tempSlider" min="0" max="40" value="20">
-    <div style="margin-top:10px;font-size:1.1rem;">
-      Temperature: <span id="tempValue">20°C</span>
-    </div>
-    <div class="temp-sample" id="tempSample"></div>
-    <div id="tempLabel" style="font-size:1.1rem;color:var(--muted);">Cold (Violet-Blue)</div>
-  </div>
-
   <div class="card" style="margin-top:1.5rem;">
     <h2>STEAM Learning</h2>
     <p class="lead">Explore science, engineering, art, and heat-activated pigments!</p>
@@ -249,4 +154,58 @@
     <h2>Fun Facts</h2>
     <ul style="font-size:1.1rem;line-height:1.6;">
       <li>Used in mood rings, baby spoons, and mugs</li>
-      <li>Thermochromism = temperature-driven color change
+      <li>Thermochromism = temperature-driven color change</li>
+    </ul>
+  </div>
+
+</main>
+
+<div id="modalBackdrop" class="modal-backdrop">
+  <div class="modal">
+    <h2>Checkout</h2>
+    <div style="display:flex;gap:10px;">
+      <div style="flex:1;">
+        <label>First Name</label>
+        <input id="firstName" type="text" placeholder="Allison">
+      </div>
+      <div style="flex:1;">
+        <label>Last Name</label>
+        <input id="lastName" type="text" placeholder="Smith">
+      </div>
+    </div>
+
+    <label style="margin-top:10px;">Email</label>
+    <input id="email" type="email" placeholder="you@example.com">
+
+    <div style="display:flex;gap:10px;margin-top:10px;">
+      <div style="flex:1;">
+        <label>Address</label>
+        <input id="addr" type="text" placeholder="123 Maker Lane">
+      </div>
+      <div style="flex:1;">
+        <label>Country</label>
+        <select id="country">
+          <option>United States</option>
+          <option>Canada</option>
+          <option>United Kingdom</option>
+        </select>
+      </div>
+    </div>
+
+    <button id="confirmBtn" class="buy-now" style="margin-top:16px;">Submit Order</button>
+  </div>
+</div>
+
+<!-- Thank You Modal -->
+<div id="thankYouModal">
+  <div id="thankYouBox">
+    <h2>Thank You for Your Purchase!</h2>
+    <p>Your ThermoBuddy is on its way 🎉</p>
+    <button id="closeThankYou" class="buy-now" style="margin-top:12px;">Close</button>
+  </div>
+</div>
+
+<script>
+const buyNow = document.getElementById('buyNow');
+const modal = document.getElementById('modalBackdrop');
+const confirmBtn = document.getElementById('
