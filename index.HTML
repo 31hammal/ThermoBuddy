@@ -80,6 +80,37 @@
     background:white;padding:22px;width:min(420px,90%);
     border-radius:18px;box-shadow:0 8px 30px rgba(0,0,0,0.25);text-align:center;
   }
+
+  /* THERMOMETER STYLE */
+  .thermo-wrapper{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    gap:40px;
+    margin-top:10px;
+  }
+  .thermo-display{
+    width:140px;
+    height:140px;
+    border-radius:50%;
+    box-shadow:0 0 25px rgba(0,0,0,0.15);
+    transition:background 0.4s ease;
+    border:4px solid #eee;
+  }
+  .thermo-slider{
+    -webkit-appearance:none;
+    width:40px;
+    height:220px;
+    writing-mode: bt-lr;
+    transform:rotate(-90deg);
+    border-radius:20px;
+  }
+  input[type=range]::-webkit-slider-thumb{
+    -webkit-appearance:none;
+    width:28px;height:28px;border-radius:50%;
+    background:var(--accent);
+    border:2px solid white;
+  }
 </style>
 </head>
 
@@ -160,13 +191,13 @@
     </ul>
   </div>
 
-  <!-- ⭐ VIDEO CARD -->
+  <!-- VIDEO -->
   <div class="card" style="margin-top:1.5rem;">
     <h2>Watch ThermoBuddy in Action</h2>
     <video src="thermobuddy_video.mp4" controls style="width:100%;border-radius:14px;margin-top:10px;"></video>
   </div>
 
-  <!-- ⭐ SAY HI BUTTON -->
+  <!-- SAY HI BUTTON -->
   <div class="card" style="margin-top:1.5rem; text-align:center;">
     <h2>Say Hi to ThermoBuddy</h2>
     <button id="hiButton" class="buy-now" style="width:auto;padding:10px 20px;">
@@ -175,6 +206,22 @@
     <p id="hiMessage" style="margin-top:12px;font-size:1.2rem;color:var(--accent-2);display:none;">
       Hi! I'm ThermoBuddy! Stay cool! ❄️💙
     </p>
+  </div>
+
+  <!-- ⭐ THERMOMETER SIMULATOR -->
+  <div class="card" style="margin-top:1.5rem;">
+    <h2>ThermoBuddy Temperature Simulator</h2>
+    <p class="lead">Slide the thermometer to change the temperature!</p>
+
+    <div class="thermo-wrapper">
+      <!-- Color-changing circle -->
+      <div id="thermoDisplay" class="thermo-display"
+        style="background:linear-gradient(135deg,#8a9cff,#c8d0ff);">
+      </div>
+
+      <!-- Thermometer slider -->
+      <input type="range" id="thermoSlider" min="0" max="100" value="0" class="thermo-slider">
+    </div>
   </div>
 
 </main>
@@ -244,7 +291,7 @@ closeThankYou.onclick = () => {
   thankYouModal.style.display = "none";
 };
 
-/* ⭐ UPDATED HI BUTTON SCRIPT WITH RESET */
+/* SAY HI BUTTON */
 const hiButton = document.getElementById('hiButton');
 const hiMessage = document.getElementById('hiMessage');
 
@@ -254,6 +301,21 @@ hiButton.onclick = () => {
   setTimeout(() => {
     hiMessage.style.display = "none";
   }, 2000);
+};
+
+/* ⭐ THERMOMETER SCRIPT */
+const thermoSlider = document.getElementById('thermoSlider');
+const thermoDisplay = document.getElementById('thermoDisplay');
+
+thermoSlider.oninput = () => {
+  const value = Number(thermoSlider.value);
+
+  // value 0 = cold (blue), 100 = hot (white)
+  if(value < 50){
+    thermoDisplay.style.background = "linear-gradient(135deg,#8a9cff,#c8d0ff)";
+  } else {
+    thermoDisplay.style.background = "white";
+  }
 };
 </script>
 
