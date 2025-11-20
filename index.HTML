@@ -125,7 +125,9 @@
     </div>
 
     <aside class="card buy-panel">
-      <h2 style="margin-top:0">Buy ThermoBuddy ($19.99)</h2>
+      <h2 style="margin-top:0">Buy ThermoBuddy</h2>
+      <p style="font-size:1.2rem;font-weight:bold;margin-bottom:8px;">Price: $19.99</p>
+
       <label>Choose Style</label>
       <select id="styleSelect">
         <option>Classic Violet-Blue</option>
@@ -158,15 +160,13 @@
     </ul>
   </div>
 
+  <!-- ⭐ VIDEO CARD -->
   <div class="card" style="margin-top:1.5rem;">
-    <h2>ThermoBuddy in Action</h2>
-    <video width="100%" controls style="border-radius:16px;box-shadow:0 4px 16px rgba(0,0,0,0.15);">
-      <source src="thermobuddy_video.mp4" type="video/mp4">
-      Your browser does not support the video tag.
-    </video>
+    <h2>Watch ThermoBuddy in Action</h2>
+    <video src="thermobuddy_video.mp4" controls style="width:100%;border-radius:14px;margin-top:10px;"></video>
   </div>
 
-  <!-- ⭐ NEW: Say Hi to ThermoBuddy Button -->
+  <!-- ⭐ SAY HI BUTTON -->
   <div class="card" style="margin-top:1.5rem; text-align:center;">
     <h2>Say Hi to ThermoBuddy</h2>
     <button id="hiButton" class="buy-now" style="width:auto;padding:10px 20px;">
@@ -215,6 +215,7 @@
   </div>
 </div>
 
+<!-- Thank You Modal -->
 <div id="thankYouModal">
   <div id="thankYouBox">
     <h2>Thank You for Your Purchase!</h2>
@@ -230,7 +231,9 @@ const confirmBtn = document.getElementById('confirmBtn');
 const thankYouModal = document.getElementById('thankYouModal');
 const closeThankYou = document.getElementById('closeThankYou');
 
-buyNow.onclick = () => modal.style.display = "flex";
+buyNow.onclick = () => {
+  modal.style.display = "flex";
+};
 
 confirmBtn.onclick = () => {
   modal.style.display = "none";
@@ -241,12 +244,16 @@ closeThankYou.onclick = () => {
   thankYouModal.style.display = "none";
 };
 
-// ⭐ NEW Hi Button Script
+/* ⭐ UPDATED HI BUTTON SCRIPT WITH RESET */
 const hiButton = document.getElementById('hiButton');
 const hiMessage = document.getElementById('hiMessage');
 
 hiButton.onclick = () => {
   hiMessage.style.display = "block";
+
+  setTimeout(() => {
+    hiMessage.style.display = "none";
+  }, 2000);
 };
 </script>
 
